@@ -3,6 +3,7 @@ import { AppRegistry, StyleSheet, Text, View } from 'react-native';
 
 import TimerLabel from './TimerLabel';
 import RoundedButton from '../RoundedButton';
+import EmptyRoundedButton from '../EmptyRoundedButton';
 import Counter from './Counter';
 
 const defaultSeconds = 25 * 60;
@@ -12,7 +13,8 @@ export default class TimerPage extends Component {
     super(props);
 
     this.state = {
-      seconds: defaultSeconds
+      seconds: defaultSeconds,
+      isRunning: false
     };
   }
 
@@ -30,6 +32,8 @@ export default class TimerPage extends Component {
             style={{ marginBottom: 16 }}
             onPress={this.start.bind(this)}
           />
+          {this.state.isRunning &&
+            <EmptyRoundedButton text="Stop" style={{ marginBottom: 16 }} />}
           <Counter />
         </View>
       </View>
@@ -51,7 +55,8 @@ export default class TimerPage extends Component {
     let timeoutID = setInterval(this.tick.bind(this), 1000);
 
     this.setState({
-      timeoutID: timeoutID
+      timeoutID: timeoutID,
+      isRunning: true
     });
   }
 
@@ -59,7 +64,8 @@ export default class TimerPage extends Component {
     clearInterval(this.state.timeoutID);
 
     this.setState({
-      seconds: defaultSeconds
+      seconds: defaultSeconds,
+      isRunning: false
     });
   }
 }
