@@ -5,15 +5,9 @@
  */
 
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  TabBarIOS
-} from 'react-native';
+import { AppRegistry, StyleSheet, Text, View, TabBarIOS } from 'react-native';
 
-import TabBar from './components/TabBar'
+import TabBar from './components/TabBar';
 
 export default class AwesomeProject extends Component {
   _onPressButton() {
@@ -21,9 +15,7 @@ export default class AwesomeProject extends Component {
   }
 
   render() {
-    return (
-      <TabBar />
-    );
+    return <TabBar />;
   }
 }
 

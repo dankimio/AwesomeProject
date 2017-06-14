@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { AppRegistry, StyleSheet, View } from "react-native";
+import React, { Component } from 'react';
+import { AppRegistry, StyleSheet, View } from 'react-native';
 
 export default class CounterItem extends Component {
   render() {
@@ -9,7 +9,7 @@ export default class CounterItem extends Component {
 
 const styles = StyleSheet.create({
   item: {
-    backgroundColor: "#e94248",
+    backgroundColor: '#e94248',
     height: 32,
     width: 32,
     borderRadius: 22

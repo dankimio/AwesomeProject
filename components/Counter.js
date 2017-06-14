@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { AppRegistry, StyleSheet, View } from "react-native";
+import React, { Component } from 'react';
+import { AppRegistry, StyleSheet, View } from 'react-native';
 
-import CounterItem from "./CounterItem";
+import CounterItem from './CounterItem';
 
 const numberOfItems = 5;
 
@@ -21,6 +21,6 @@ export default class Counter extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row"
+    flexDirection: 'row'
   }
 });

@@ -1,21 +1,21 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
   Text,
   TouchableHighlight,
   View
-} from "react-native";
+} from 'react-native';
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "#e94248",
+    backgroundColor: '#e94248',
     padding: 10,
-    alignItems: "center",
+    alignItems: 'center',
     borderRadius: 5
   },
   buttonText: {
-    color: "white"
+    color: 'white'
   }
 });
 

@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { AppRegistry, StyleSheet, Text, View } from "react-native";
+import React, { Component } from 'react';
+import { AppRegistry, StyleSheet, Text, View } from 'react-native';
 
 export default class TimerLabel extends Component {
   constructor(props) {
@@ -14,8 +14,8 @@ export default class TimerLabel extends Component {
 const styles = StyleSheet.create({
   label: {
     fontSize: 100,
-    fontWeight: "100",
-    color: "#f05a5a",
+    fontWeight: '100',
+    color: '#f05a5a',
     marginBottom: 16
   }
 });

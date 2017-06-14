@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { AppRegistry, StyleSheet, Text, View } from "react-native";
+import React, { Component } from 'react';
+import { AppRegistry, StyleSheet, Text, View } from 'react-native';
 
-import TimerLabel from "./TimerLabel";
-import RoundedButton from "./RoundedButton";
-import Counter from "./Counter";
+import TimerLabel from './TimerLabel';
+import RoundedButton from './RoundedButton';
+import Counter from './Counter';
 
 export default class TimerPage extends Component {
   render() {
@@ -22,8 +22,8 @@ export default class TimerPage extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fafafa",
-    justifyContent: "center",
-    alignItems: "center"
+    backgroundColor: '#fafafa',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
