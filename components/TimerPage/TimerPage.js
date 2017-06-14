@@ -14,7 +14,9 @@ export default class TimerPage extends Component {
 
     this.state = {
       seconds: defaultSeconds,
-      isRunning: false
+      isRunning: false,
+      isPaused: false,
+      timeoutID: null
     };
   }
 
@@ -27,16 +29,54 @@ export default class TimerPage extends Component {
       <View style={styles.container}>
         <View>
           <TimerLabel seconds={this.state.seconds} />
-          <RoundedButton
-            text="Start"
-            style={{ marginBottom: 16 }}
-            onPress={this.start.bind(this)}
-          />
-          {this.state.isRunning &&
-            <EmptyRoundedButton text="Stop" style={{ marginBottom: 16 }} />}
+          {this.primaryButton()}
+          {this.secondaryButton()}
           <Counter />
         </View>
       </View>
+    );
+  }
+
+  primaryButton() {
+    if (!this.state.isRunning) {
+      return (
+        <RoundedButton
+          text="Start"
+          style={{ marginBottom: 16 }}
+          onPress={this.start.bind(this)}
+        />
+      );
+    }
+    if (this.state.isPaused) {
+      return (
+        <RoundedButton
+          text="Resume"
+          style={{ marginBottom: 16 }}
+          onPress={this.resume.bind(this)}
+        />
+      );
+    } else {
+      return (
+        <RoundedButton
+          text="Pause"
+          style={{ marginBottom: 16 }}
+          onPress={this.pause.bind(this)}
+        />
+      );
+    }
+  }
+
+  secondaryButton() {
+    if (!this.state.isRunning) {
+      return null;
+    }
+
+    return (
+      <EmptyRoundedButton
+        text="Stop"
+        style={{ marginBottom: 16 }}
+        onPress={this.stop.bind(this)}
+      />
     );
   }
 
@@ -52,21 +92,47 @@ export default class TimerPage extends Component {
   }
 
   start() {
-    let timeoutID = setInterval(this.tick.bind(this), 1000);
-
+    this.startTicking();
     this.setState({
-      timeoutID: timeoutID,
-      isRunning: true
+      isRunning: true,
+      isPaused: false
+    });
+  }
+
+  pause() {
+    this.stopTicking();
+    this.setState({
+      isPaused: true
+    });
+  }
+
+  resume() {
+    this.startTicking();
+    this.setState({
+      isRunning: true,
+      isPaused: false
     });
   }
 
   stop() {
-    clearInterval(this.state.timeoutID);
-
+    this.stopTicking();
     this.setState({
       seconds: defaultSeconds,
-      isRunning: false
+      isRunning: false,
+      isPaused: false
     });
+  }
+
+  startTicking() {
+    let timeoutID = setInterval(this.tick.bind(this), 1000);
+
+    this.setState({
+      timeoutID: timeoutID
+    });
+  }
+
+  stopTicking() {
+    clearInterval(this.state.timeoutID);
   }
 }
 
