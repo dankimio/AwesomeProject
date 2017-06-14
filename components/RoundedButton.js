@@ -7,22 +7,14 @@ import {
   View
 } from 'react-native';
 
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: '#e94248',
-    padding: 10,
-    alignItems: 'center',
-    borderRadius: 5
-  },
-  buttonText: {
-    color: 'white'
-  }
-});
-
 export default class RoundedButton extends Component {
   render() {
     return (
-      <TouchableHighlight onPress={() => 1} underlayColor="#fafafa">
+      <TouchableHighlight
+        onPress={() => 1}
+        underlayColor="#fafafa"
+        style={this.props.style}
+      >
         <View style={styles.button}>
           <Text style={styles.buttonText}>{this.props.text}</Text>
         </View>
@@ -30,3 +22,16 @@ export default class RoundedButton extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  button: {
+    backgroundColor: '#e94248',
+    padding: 10,
+    alignItems: 'center',
+    borderRadius: 5,
+    marginBottom: 8
+  },
+  buttonText: {
+    color: 'white'
+  }
+});

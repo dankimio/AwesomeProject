@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, TabBarIOS } from 'react-native';
 
-import TimerPage from './TimerPage';
+import TimerPage from './TimerPage/TimerPage';
 
 export default class TabBar extends Component {
   constructor(props) {

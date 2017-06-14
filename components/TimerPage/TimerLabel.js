@@ -13,9 +13,10 @@ export default class TimerLabel extends Component {
 
 const styles = StyleSheet.create({
   label: {
-    fontSize: 100,
+    fontSize: 108,
     fontWeight: '100',
     color: '#f05a5a',
-    marginBottom: 16
+    marginBottom: 16,
+    textAlign: 'center'
   }
 });

@@ -10,8 +10,10 @@ export default class CounterItem extends Component {
 const styles = StyleSheet.create({
   item: {
     backgroundColor: '#e94248',
-    height: 32,
-    width: 32,
-    borderRadius: 22
+    height: 25,
+    width: 25,
+    borderRadius: 16,
+    marginHorizontal: 5,
+    marginBottom: 8
   }
 });

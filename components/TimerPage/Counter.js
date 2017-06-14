@@ -3,11 +3,16 @@ import { AppRegistry, StyleSheet, View } from 'react-native';
 
 import CounterItem from './CounterItem';
 
-const numberOfItems = 5;
-
 export default class Counter extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      count: 16
+    };
+  }
   render() {
-    let items = Array(numberOfItems).fill(null).map((_, index) => {
+    let items = Array(this.state.count).fill(null).map((_, index) => {
       return <CounterItem key={index} />;
     });
 
@@ -21,6 +26,9 @@ export default class Counter extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row'
+    justifyContent: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 8
   }
 });
