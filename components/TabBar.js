@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AppRegistry, TabBarIOS } from 'react-native';
 
 import TimerPage from './TimerPage/TimerPage';
+import SettingsPage from './SettingsPage/SettingsPage';
 
 export default class TabBar extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ export default class TabBar extends Component {
           selected={this.state.selectedTab === 'settings'}
           onPress={() => this.selectTab('settings')}
         >
-          <TimerPage message="settings" />
+          <SettingsPage />
         </TabBarIOS.Item>
       </TabBarIOS>
     );
