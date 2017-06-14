@@ -11,7 +11,7 @@ export default class RoundedButton extends Component {
   render() {
     return (
       <TouchableHighlight
-        onPress={() => 1}
+        onPress={this.props.onPress}
         underlayColor="#fafafa"
         style={this.props.style}
       >

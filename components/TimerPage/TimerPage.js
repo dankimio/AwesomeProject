@@ -17,7 +17,7 @@ export default class TimerPage extends Component {
   }
 
   componentDidMount() {
-    this.start();
+    // this.start();
   }
 
   render() {
@@ -25,7 +25,11 @@ export default class TimerPage extends Component {
       <View style={styles.container}>
         <View>
           <TimerLabel seconds={this.state.seconds} />
-          <RoundedButton text="Start" style={{ marginBottom: 16 }} />
+          <RoundedButton
+            text="Start"
+            style={{ marginBottom: 16 }}
+            onPress={this.start.bind(this)}
+          />
           <Counter />
         </View>
       </View>
