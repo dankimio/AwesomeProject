@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
-import { Alert, StyleSheet, View } from 'react-native';
+import { Alert, AppState, AsyncStorage, StyleSheet, View } from 'react-native';
 
 import TimerLabel from './TimerLabel';
 import RoundedButton from '../RoundedButton';
 import EmptyRoundedButton from '../EmptyRoundedButton';
 import Counter from './Counter';
 
-const defaultSeconds = 25 * 60;
+// const defaultSeconds = 25 * 60;
+const defaultSeconds = 15;
 
 export default class TimerPage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      appState: AppState.currentState,
       seconds: defaultSeconds,
       isRunning: false,
       isPaused: false,
@@ -21,7 +23,11 @@ export default class TimerPage extends Component {
   }
 
   componentDidMount() {
-    // this.start();
+    AppState.addEventListener('change', this.handleAppStateChange.bind(this));
+  }
+
+  componentWillUnmount() {
+    AppState.removeEventListener('change', this.handleAppStateChange.bind(this));
   }
 
   render() {
@@ -68,6 +74,8 @@ export default class TimerPage extends Component {
   }
 
   tick() {
+    console.log('Tick');
+
     this.setState({
       seconds: this.state.seconds - 1,
     });
@@ -102,7 +110,6 @@ export default class TimerPage extends Component {
   }
 
   stop() {
-    console.log('STOP');
     this.stopTicking();
     this.setState({
       seconds: defaultSeconds,
@@ -121,6 +128,52 @@ export default class TimerPage extends Component {
 
   stopTicking() {
     clearInterval(this.state.timeoutID);
+  }
+
+  handleAppStateChange() {
+    if (AppState.currentState === 'active') {
+      this.load();
+    }
+    if (AppState.currentState === 'inactive') {
+      this.save();
+    }
+  }
+
+  async save() {
+    if (!this.state.isRunning || this.state.isPaused) {
+      return;
+    }
+
+    let date = new Date();
+    date = new Date(date.setSeconds(date.getSeconds() + this.state.seconds));
+
+    try {
+      await AsyncStorage.setItem('seconds', JSON.stringify(date));
+    } catch (error) {}
+  }
+
+  async load() {
+    try {
+      const value = await AsyncStorage.getItem('seconds');
+      const dateString = JSON.parse(value);
+      if (dateString === null) {
+        return;
+      }
+
+      const date = new Date(dateString);
+      if (date === null) {
+        return;
+      }
+
+      const now = new Date();
+      const differenceInSeconds = (date.getTime() - now.getTime()) / 1000;
+
+      if (differenceInSeconds <= 0) {
+        return;
+      }
+
+      this.setState({ seconds: Math.trunc(differenceInSeconds) });
+    } catch (error) {}
   }
 }
 
