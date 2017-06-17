@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 
 import TimerLabel from './TimerLabel';
 import RoundedButton from '../RoundedButton';

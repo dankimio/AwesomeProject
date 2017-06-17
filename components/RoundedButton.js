@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import PropTypes from 'prop-types';
 
 export default class RoundedButton extends Component {
   render() {
@@ -16,6 +17,16 @@ export default class RoundedButton extends Component {
     );
   }
 }
+
+RoundedButton.propTypes = {
+  onPress: PropTypes.func.isRequired,
+  style: PropTypes.object,
+  text: PropTypes.string.isRequired,
+};
+
+RoundedButton.defaultProps = {
+  style: [],
+};
 
 const styles = StyleSheet.create({
   container: {

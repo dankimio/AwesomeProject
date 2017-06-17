@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text } from 'react-native';
+import PropTypes from 'prop-types';
 
 export default class TimerLabel extends Component {
   render() {
@@ -17,6 +18,10 @@ export default class TimerLabel extends Component {
     return `${minutes}:${seconds}`;
   }
 }
+
+TimerLabel.propTypes = {
+  seconds: PropTypes.number.isRequired,
+};
 
 const styles = StyleSheet.create({
   label: {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import PropTypes from 'prop-types';
 
 export default class EmptyRoundedButton extends Component {
   constructor(props) {
@@ -36,6 +37,11 @@ export default class EmptyRoundedButton extends Component {
     return { color: 'white' };
   }
 }
+
+EmptyRoundedButton.propTypes = {
+  style: PropTypes.object,
+  text: PropTypes.string.isRequired,
+};
 
 const styles = StyleSheet.create({
   container: {
