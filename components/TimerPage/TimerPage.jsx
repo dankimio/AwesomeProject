@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import TimerLabel from './TimerLabel';
 import RoundedButton from '../RoundedButton';
@@ -16,7 +16,7 @@ export default class TimerPage extends Component {
       seconds: defaultSeconds,
       isRunning: false,
       isPaused: false,
-      timeoutID: null
+      timeoutID: null,
     };
   }
 
@@ -40,11 +40,7 @@ export default class TimerPage extends Component {
   primaryButton() {
     if (!this.state.isRunning) {
       return (
-        <RoundedButton
-          text="Start"
-          style={{ marginBottom: 16 }}
-          onPress={this.start.bind(this)}
-        />
+        <RoundedButton text="Start" style={{ marginBottom: 16 }} onPress={this.start.bind(this)} />
       );
     }
     if (this.state.isPaused) {
@@ -55,15 +51,10 @@ export default class TimerPage extends Component {
           onPress={this.resume.bind(this)}
         />
       );
-    } else {
-      return (
-        <RoundedButton
-          text="Pause"
-          style={{ marginBottom: 16 }}
-          onPress={this.pause.bind(this)}
-        />
-      );
     }
+    return (
+      <RoundedButton text="Pause" style={{ marginBottom: 16 }} onPress={this.pause.bind(this)} />
+    );
   }
 
   secondaryButton() {
@@ -72,17 +63,13 @@ export default class TimerPage extends Component {
     }
 
     return (
-      <EmptyRoundedButton
-        text="Stop"
-        style={{ marginBottom: 16 }}
-        onPress={this.stop.bind(this)}
-      />
+      <EmptyRoundedButton text="Stop" style={{ marginBottom: 16 }} onPress={this.stop.bind(this)} />
     );
   }
 
   tick() {
     this.setState({
-      seconds: this.state.seconds - 1
+      seconds: this.state.seconds - 1,
     });
 
     if (this.state.seconds <= 0) {
@@ -95,14 +82,14 @@ export default class TimerPage extends Component {
     this.startTicking();
     this.setState({
       isRunning: true,
-      isPaused: false
+      isPaused: false,
     });
   }
 
   pause() {
     this.stopTicking();
     this.setState({
-      isPaused: true
+      isPaused: true,
     });
   }
 
@@ -110,7 +97,7 @@ export default class TimerPage extends Component {
     this.startTicking();
     this.setState({
       isRunning: true,
-      isPaused: false
+      isPaused: false,
     });
   }
 
@@ -119,15 +106,15 @@ export default class TimerPage extends Component {
     this.setState({
       seconds: defaultSeconds,
       isRunning: false,
-      isPaused: false
+      isPaused: false,
     });
   }
 
   startTicking() {
-    let timeoutID = setInterval(this.tick.bind(this), 1000);
+    const timeoutID = setInterval(this.tick.bind(this), 1000);
 
     this.setState({
-      timeoutID: timeoutID
+      timeoutID,
     });
   }
 
@@ -142,6 +129,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fafafa',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 44
-  }
+    paddingHorizontal: 44,
+  },
 });

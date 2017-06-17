@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View
-} from 'react-native';
+import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
 export default class RoundedButton extends Component {
   render() {
@@ -27,14 +21,14 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: '#e94248'
+    borderColor: '#e94248',
   },
   button: {
     backgroundColor: '#e94248',
     padding: 10,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   buttonText: {
-    color: 'white'
-  }
+    color: 'white',
+  },
 });

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default class settingsPage extends Component {
   render() {
@@ -12,5 +12,5 @@ export default class settingsPage extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {}
+  container: {},
 });

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, TabBarIOS } from 'react-native';
+import { TabBarIOS } from 'react-native';
 
 import TimerPage from './TimerPage/TimerPage';
 import SettingsPage from './SettingsPage/SettingsPage';
@@ -9,7 +9,7 @@ export default class TabBar extends Component {
     super(props);
 
     this.state = {
-      selectedTab: 'timer'
+      selectedTab: 'timer',
     };
   }
 

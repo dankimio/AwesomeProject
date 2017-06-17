@@ -1,26 +1,19 @@
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View
-} from 'react-native';
+import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
 export default class EmptyRoundedButton extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isHighlighted: false
+      isHighlighted: false,
     };
   }
+
   render() {
     return (
       <TouchableHighlight
-        onPress={() => {
-          return 1;
-        }}
+        onPress={() => 1}
         onShowUnderlay={() => this.setState({ isHighlighted: true })}
         onHideUnderlay={() => this.setState({ isHighlighted: false })}
         underlayColor="#e94248"
@@ -49,13 +42,13 @@ const styles = StyleSheet.create({
     borderColor: '#e94248',
     borderRadius: 5,
     borderWidth: 1,
-    marginBottom: 8
+    marginBottom: 8,
   },
   button: {
     alignItems: 'center',
-    padding: 10
+    padding: 10,
   },
   buttonText: {
-    color: '#e94248'
-  }
+    color: '#e94248',
+  },
 });

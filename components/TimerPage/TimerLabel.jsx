@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 
 export default class TimerLabel extends Component {
   render() {
@@ -12,8 +12,8 @@ export default class TimerLabel extends Component {
 
   formattedTime() {
     // Pad with zeros
-    let minutes = `${Math.floor(this.props.seconds / 60)}`.padStart(2, '0');
-    let seconds = `${this.props.seconds % 60}`.padStart(2, '0');
+    const minutes = `${Math.floor(this.props.seconds / 60)}`.padStart(2, '0');
+    const seconds = `${this.props.seconds % 60}`.padStart(2, '0');
     return `${minutes}:${seconds}`;
   }
 }
@@ -25,6 +25,6 @@ const styles = StyleSheet.create({
     color: '#f05a5a',
     marginBottom: 16,
     textAlign: 'center',
-    fontFamily: 'Helvetica Neue'
-  }
+    fontFamily: 'Helvetica Neue',
+  },
 });
