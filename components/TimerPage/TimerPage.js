@@ -102,6 +102,7 @@ export default class TimerPage extends Component {
   }
 
   stop() {
+    console.log('STOP');
     this.stopTicking();
     this.setState({
       seconds: defaultSeconds,

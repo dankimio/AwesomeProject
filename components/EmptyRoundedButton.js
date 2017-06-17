@@ -14,7 +14,7 @@ export default class EmptyRoundedButton extends Component {
   render() {
     return (
       <TouchableHighlight
-        onPress={() => 1}
+        onPress={this.props.onPress}
         onShowUnderlay={() => this.setState({ isHighlighted: true })}
         onHideUnderlay={() => this.setState({ isHighlighted: false })}
         underlayColor="#e94248"
@@ -39,6 +39,7 @@ export default class EmptyRoundedButton extends Component {
 }
 
 EmptyRoundedButton.propTypes = {
+  onPress: PropTypes.func,
   style: PropTypes.object,
   text: PropTypes.string.isRequired,
 };
