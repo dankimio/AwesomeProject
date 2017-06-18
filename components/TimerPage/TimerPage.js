@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, AppState, AsyncStorage, StyleSheet, View } from 'react-native';
+import { Alert, AppState, AsyncStorage, LayoutAnimation, StyleSheet, View } from 'react-native';
 
 import TimerLabel from './TimerLabel';
 import RoundedButton from '../RoundedButton';
@@ -87,6 +87,8 @@ export default class TimerPage extends Component {
   }
 
   start() {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+
     this.startTicking();
     this.setState({
       isRunning: true,
@@ -110,6 +112,8 @@ export default class TimerPage extends Component {
   }
 
   stop() {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+
     this.stopTicking();
     this.setState({
       seconds: defaultSeconds,
