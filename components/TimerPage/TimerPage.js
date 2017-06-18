@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { Alert, AppState, AsyncStorage, LayoutAnimation, StyleSheet, View } from 'react-native';
+import {
+  Alert,
+  AppState,
+  AsyncStorage,
+  LayoutAnimation,
+  PushNotificationIOS,
+  StyleSheet,
+  View,
+} from 'react-native';
 
 import TimerLabel from './TimerLabel';
 import RoundedButton from '../RoundedButton';
@@ -7,7 +15,7 @@ import EmptyRoundedButton from '../EmptyRoundedButton';
 import Counter from './Counter';
 
 // const defaultSeconds = 25 * 60;
-const defaultSeconds = 15;
+const defaultSeconds = 10;
 
 export default class TimerPage extends Component {
   constructor(props) {
@@ -24,6 +32,8 @@ export default class TimerPage extends Component {
 
   componentDidMount() {
     AppState.addEventListener('change', this.handleAppStateChange.bind(this));
+
+    PushNotificationIOS.requestPermissions(['alert', 'badge', 'sound']);
   }
 
   componentWillUnmount() {
@@ -46,7 +56,7 @@ export default class TimerPage extends Component {
   primaryButton() {
     if (!this.state.isRunning) {
       return (
-        <RoundedButton text="Start" style={{ marginBottom: 16 }} onPress={this.start.bind(this)} />
+        <RoundedButton text="Start" style={{ marginBottom: 24 }} onPress={this.start.bind(this)} />
       );
     }
     if (this.state.isPaused) {
@@ -137,42 +147,58 @@ export default class TimerPage extends Component {
   handleAppStateChange() {
     if (AppState.currentState === 'active') {
       this.load();
+      PushNotificationIOS.cancelAllLocalNotifications();
     }
     if (AppState.currentState === 'inactive') {
-      this.save();
+      this.handleInactiveState();
     }
   }
 
-  async save() {
+  handleInactiveState() {
+    // Return if paused or stopped
     if (!this.state.isRunning || this.state.isPaused) {
       return;
     }
+    this.save();
+    PushNotificationIOS.scheduleLocalNotification({
+      fireDate: this.fireDate(),
+      alertBody: 'Time is up!',
+    });
+  }
 
-    let date = new Date();
-    date = new Date(date.setSeconds(date.getSeconds() + this.state.seconds));
+  fireDate() {
+    const date = new Date();
+    date.setSeconds(date.getSeconds() + this.state.seconds);
+    return date;
+  }
 
+  async save() {
     try {
-      await AsyncStorage.setItem('seconds', JSON.stringify(date));
+      await AsyncStorage.setItem('seconds', JSON.stringify(this.fireDate()));
     } catch (error) {}
   }
 
   async load() {
     try {
+      // Read and parse date from storage
       const value = await AsyncStorage.getItem('seconds');
       const dateString = JSON.parse(value);
+      // Remove date from storage
+      await AsyncStorage.removeItem('seconds');
       if (dateString === null) {
         return;
       }
-
+      // Create date from string
       const date = new Date(dateString);
       if (date === null) {
         return;
       }
-
+      // Get difference in seconds to update remaining seconds
       const now = new Date();
       const differenceInSeconds = (date.getTime() - now.getTime()) / 1000;
 
       if (differenceInSeconds <= 0) {
+        this.stop();
         return;
       }
 
