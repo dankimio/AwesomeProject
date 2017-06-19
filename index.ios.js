@@ -7,13 +7,9 @@
 import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
 
-import TabBar from './components/TabBar';
+import TabBar from './app/components/TabBar';
 
 export default class AwesomeProject extends Component {
-  _onPressButton() {
-    console.log('Hello!');
-  }
-
   render() {
     return <TabBar />;
   }

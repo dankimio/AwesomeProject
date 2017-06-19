@@ -15,7 +15,7 @@ import EmptyRoundedButton from '../EmptyRoundedButton';
 import Counter from './Counter';
 
 // const defaultSeconds = 25 * 60;
-const defaultSeconds = 10;
+const defaultSeconds = 5;
 
 export default class TimerPage extends Component {
   constructor(props) {
@@ -27,13 +27,14 @@ export default class TimerPage extends Component {
       isRunning: false,
       isPaused: false,
       timeoutID: null,
+      pomodorosCount: 0,
     };
   }
 
   componentDidMount() {
     AppState.addEventListener('change', this.handleAppStateChange.bind(this));
-
     PushNotificationIOS.requestPermissions(['alert', 'badge', 'sound']);
+    this.setPomodorosCount();
   }
 
   componentWillUnmount() {
@@ -47,7 +48,7 @@ export default class TimerPage extends Component {
           <TimerLabel seconds={this.state.seconds} />
           {this.primaryButton()}
           {this.secondaryButton()}
-          <Counter />
+          <Counter count={this.state.pomodorosCount} />
         </View>
       </View>
     );
@@ -91,6 +92,7 @@ export default class TimerPage extends Component {
     });
 
     if (this.state.seconds <= 0) {
+      this.incrementCount();
       this.stop();
       Alert.alert('Time is up!');
     }
@@ -170,6 +172,26 @@ export default class TimerPage extends Component {
     const date = new Date();
     date.setSeconds(date.getSeconds() + this.state.seconds);
     return date;
+  }
+
+  setPomodorosCount() {
+    AsyncStorage.getItem(this.currentDateKey()).then((value) => {
+      const parsedValue = JSON.parse(value);
+      const pomodorosCount = parsedValue === null ? 0 : parsedValue;
+      this.setState({ pomodorosCount });
+    });
+  }
+
+  incrementCount() {
+    const newCount = this.state.pomodorosCount + 1;
+    AsyncStorage.setItem(this.currentDateKey(), JSON.stringify(newCount));
+    this.setPomodorosCount();
+  }
+
+  // Current date formatted as YYYY-MM-DD
+  currentDateKey() {
+    const today = new Date();
+    return today.toISOString().slice(0, 10);
   }
 
   async save() {
